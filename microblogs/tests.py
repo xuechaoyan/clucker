@@ -1,7 +1,31 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from .models import User
+from django.db import models
 
+class PostModelTestCase(TestCase):
+    def setUp(self):
+        self.post=Post.objects.create_post(
+            author='Ryan',
+            text='this is a text',
+            created_at=models.DateTimeFIeld()
+        )
+
+    def test_author_must_be_unique(self):
+        second_user= self._create_second_user()
+        self.user.username = second_user.username
+        self._assert_user_is_invalid()
+
+    def _assert_post_is_valid(self):
+        try:
+            self.psot.full_clean()
+        except(ValidationError):
+            self.fail('Test user should be valid')
+
+
+    def _assert_post_is_invalid(self):
+        with self.assertRaises(ValidationError):
+            self.user.full_clean()
 
 class UserMOdelTestCase(TestCase):
     def setUp(self):

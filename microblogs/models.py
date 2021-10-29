@@ -16,7 +16,9 @@ class User(AbstractUser):
     email=models.EmailField(unique=True,blank=False)
     bio = models.CharField(max_length=520,blank=True)
 
-'''class Post(models.Model):
-    author=models.Foreignkey(User, on_delete=models.CASECADE,unique=True)
+class Post(models.Model):
+    author=models.ForeignKey(User, on_delete=models.CASCADE)
     text=models.CharField(max_length=280)
-    created_at=models.DateTimeFIeld()'''
+    created_at=models.DateTimeField()
+    class Meta:
+        ordering=['-created_at']

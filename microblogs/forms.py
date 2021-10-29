@@ -5,8 +5,8 @@ from .models import RegexValidator
 
 class LogInForm(forms.Form):
     username = forms.CharField(label='Username')
-    password=forms.CharField(label='Password',widget=form.PasswordInput())
-    
+    password=forms.CharField(label='Password',widget=forms.PasswordInput())
+
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
